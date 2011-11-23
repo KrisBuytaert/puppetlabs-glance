@@ -6,5 +6,15 @@ class glance {
     mode    => 770,
     require => Package['glance']
   }
-  package { 'glance': ensure => present }
+  package { "glance": 
+         name => $operatingsystem  ? {
+		    'default' => 'glance',
+		     'ubuntu' => 'glance',
+		    'debian'  => 'glance',
+		    'centos'  => 'openstack-glance' },
+	  ensure => present, 
+	}
+
+
 }
+		

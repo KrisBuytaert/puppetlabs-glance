@@ -16,6 +16,9 @@ class glance::registry(
     require => Class["glance"]
   }
   service { "glance-registry":
+    name       => $operatingsystem ? { 
+		'default' => 'glance-registry',
+		'centos'  => 'openstack-glance-registry' },
     ensure     => running,
     enable     => true,
     hasstatus  => true,

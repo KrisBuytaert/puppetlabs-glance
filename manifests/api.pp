@@ -25,6 +25,10 @@ class glance::api(
   }
 
   service { "glance-api":
+    name       => $operatingsystem ? {
+		'default' => 'glance-api',
+		'centos'  => 'openstack-glance-api'
+		},
     ensure     => running,
     enable     => true,
     hasstatus  => true,
